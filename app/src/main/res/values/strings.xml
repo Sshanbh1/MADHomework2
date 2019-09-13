@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">HW02</string>
+    <string name="Delivery">Delivery</string>
+    <string name="addtopping">Add Toppings</string>
+    <string name="clearpizza">Clear Pizza</string>
+    <string name="checkout">Checkout</string>
+    <string name="pick_toppings">Pick Your Toppings</string>
+    <string name="yourorder">Your Order</string>
+    <string name="baseprice">Base Price :</string>
+    <string name="tv_toppings" >Toppings :</string>
+    <string name="deliverycost">Delivery Cost :</string>
+    <string name="total">Total</string>
+    <string name="bt_finish">Finish</string>
+</resources>
