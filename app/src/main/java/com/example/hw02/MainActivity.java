@@ -5,25 +5,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayout;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Integer> Images = new ArrayList<>();
 
     public static final String TOP_LIST = "toppingProf";
 
     private ImageView iv_pizza;
-    private GridLayout gv_toppings;
+
+    private GridView gv_toppings;
 
     private Button bt_clearpizza;
     private Button bt_checkout;
@@ -43,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
         final String[] initToppings = getResources().getStringArray(R.array.toppings_array);
 
         iv_pizza = findViewById(R.id.iv_pizza);
+
+        /* Generating Grid Images */
         gv_toppings = findViewById(R.id.gv_toppings);
+        /* Generating Grid Images End */
 
         bt_clearpizza = findViewById(R.id.bt_clearpizza);
         bt_checkout = findViewById(R.id.bt_checkout);
@@ -62,20 +66,47 @@ public class MainActivity extends AppCompatActivity {
                 .setItems(R.array.toppings_array, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         mToppingArray.add(initToppings[which]);
+
+                        if(initToppings[which].equals("Bacon")){
+                            Images.add(R.drawable.bacon);
+                        } else if (initToppings[which].equals("Cheese")) {
+                            Images.add(R.drawable.cheese);
+                        } else if (initToppings[which].equals("Garlic")) {
+                            Images.add(R.drawable.garlic);
+                        } else if (initToppings[which].equals("Green Pepper")) {
+                            Images.add(R.drawable.green_pepper);
+                        } else if (initToppings[which].equals("Mashroom")) {
+                            Images.add(R.drawable.mashroom);
+                        } else if (initToppings[which].equals("Olive")) {
+                            Images.add(R.drawable.olive);
+                        } else if (initToppings[which].equals("Onion")) {
+                            Images.add(R.drawable.onion);
+                        } else if (initToppings[which].equals("Red Pepper")) {
+                            Images.add(R.drawable.red_pepper);
+                        }
+
+                        // Adapter Init
+                        AdapterCustom adapterCustom = new AdapterCustom(getApplicationContext(), Images);
+                        gv_toppings.setAdapter(adapterCustom);
+
+                        gv_toppings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Images.remove(position);
+                                mToppingArray.remove(position);
+                                // Adapter Init
+                                AdapterCustom adapterCustom = new AdapterCustom(getApplicationContext(), Images);
+                                gv_toppings.setAdapter(adapterCustom);
+                                Toast.makeText(getApplicationContext(), "Topping Removed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                         pb_toppings.setProgress(mToppingArray.size());
                     }
                 });
 
         final AlertDialog alert11 = builder1.create();
         /* Alert Box Complete */
-
-        /* Generating Grid Images */
-        gv_toppings.removeAllViews();
-
-        gv_toppings.setColumnCount(5);
-        gv_toppings.setRowCount(2);
-        /* Generating Grid Images End */
-
 
         bt_addtoppings.setOnClickListener(new View.OnClickListener() {
             @Override
