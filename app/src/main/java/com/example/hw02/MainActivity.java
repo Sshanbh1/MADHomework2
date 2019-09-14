@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                 AdapterCustom adapterCustom = new AdapterCustom(getApplicationContext(), Images);
                                 gv_toppings.setAdapter(adapterCustom);
                                 Toast.makeText(getApplicationContext(), "Topping Removed", Toast.LENGTH_SHORT).show();
+                                pb_toppings.setProgress(mToppingArray.size());
                             }
                         });
 
