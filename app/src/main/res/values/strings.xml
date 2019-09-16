@@ -9,6 +9,6 @@
     <string name="baseprice">Base Price :</string>
     <string name="tv_toppings" >Toppings :</string>
     <string name="deliverycost">Delivery Cost :</string>
-    <string name="total">Total</string>
+    <string name="total">TOTAL</string>
     <string name="bt_finish">Finish</string>
 </resources>

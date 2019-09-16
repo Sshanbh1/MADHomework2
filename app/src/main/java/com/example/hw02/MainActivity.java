@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         iv_pizza = findViewById(R.id.iv_pizza);
 
-        /* Generating Grid Images */
-        //gv_toppings = findViewById(R.id.gv_toppings);
         /* Generating Grid Images End */
 
         bt_clearpizza = findViewById(R.id.bt_clearpizza);
@@ -74,17 +72,11 @@ public class MainActivity extends AppCompatActivity {
         pb_toppings.setVisibility(View.VISIBLE);
         pb_toppings.setMax(10);
 
-
-        /**
-         * */
-        //tr_tableRow1 = findViewById(R.id.tr_toppingRow1);
         lo_topping1 = findViewById(R.id.layout_toppings_1);
         lo_topping2 = findViewById(R.id.layout_toppings_2);
 
         final RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
-        //final ImageView iv_addedTopping = new ImageView(this);
 
         /* Generating Alert Box*/
         final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -92,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         builder1.setTitle(R.string.pick_toppings)
                 .setItems(R.array.toppings_array, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //Images = new ArrayList<>();
                         Integer topping = -1;
                         mToppingArray.add(initToppings[which]);
 
@@ -160,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
                                         mToppingArray.set(view.getId(),null);
                                         layoutElementCount--;
                                     }
-                                    //int index = 0;
                                     while(lo_topping1.getChildCount()<5 && layoutElementCount>4)
                                     {
                                         if(lo_topping2.getChildCount()>0)
@@ -191,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 if(layoutElementCount < 10){
                     alert11.show();
                 } else {
-                    Toast.makeText(getApplicationContext(),"Only 10 toppings Allowed",
+                    Toast.makeText(getApplicationContext(),"Maximum Topping capacity reached!",
                             Toast.LENGTH_SHORT).show();
                 }
             }

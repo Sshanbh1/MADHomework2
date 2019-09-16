@@ -2,6 +2,7 @@ package com.example.hw02;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +23,8 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView tv_TotalPrice;
     Button bt_finish;
     private int totalItems = 0;
+    TextView tv_deliverycost;
+    TextView textView5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,12 @@ public class CheckoutActivity extends AppCompatActivity {
         tv_deliveryprice = findViewById(R.id.tv_deliveryprice);
         tv_TotalPrice = findViewById(R.id.tv_TotalPrice);
         bt_finish = findViewById(R.id.bt_finish);
+        tv_deliverycost = findViewById(R.id.tv_deliverycost);
+        textView5 = findViewById(R.id.textView5);
 
         Double basePrice = 6.50;
         Double ppToppings = 1.50;
-        int DeliveryCharge = 4;
+        Double DeliveryCharge = 4.0;
 
         tv_basepricemain.setText(MessageFormat.format("{0}$", (basePrice).toString()));
 
@@ -71,14 +76,19 @@ public class CheckoutActivity extends AppCompatActivity {
         Double TotalPrice = 0.0;
 
         if(delivery) {
-            tv_deliveryprice.setText(MessageFormat.format("{0}$", Integer.toString((DeliveryCharge))));
+            tv_deliveryprice.setText(MessageFormat.format("{0}$", Double.toString((DeliveryCharge))));
             TotalPrice = basePrice + toppingPrice + DeliveryCharge;
         } else {
-            tv_deliveryprice.setText("0");
+            tv_deliveryprice.setVisibility(View.INVISIBLE);
+            tv_deliverycost.setVisibility(View.INVISIBLE);
             TotalPrice = basePrice + toppingPrice;
         }
 
+        tv_TotalPrice.setPaintFlags(tv_TotalPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         tv_TotalPrice.setText(MessageFormat.format("{0}$", (TotalPrice).toString()));
+
+        textView5.setPaintFlags(textView5.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
 
         bt_finish.setOnClickListener(new View.OnClickListener() {
             @Override
