@@ -1,3 +1,10 @@
+/*
+Ravina Shantaram Gaikawad
+Sameer Shanbhag
+Pranav Kamble
+Group no 7
+ */
+
 package com.example.hw02;
 
 import android.app.AlertDialog;
