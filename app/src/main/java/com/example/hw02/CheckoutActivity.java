@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -20,11 +21,13 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView tv_deliveryprice;
     TextView tv_TotalPrice;
     Button bt_finish;
+    private int totalItems = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        setTitle("Pizza Store");
 
         tv_basepricemain = findViewById(R.id.tv_basepricemain);
         tv_toppingList = findViewById(R.id.tv_toppingList);
@@ -43,19 +46,26 @@ public class CheckoutActivity extends AppCompatActivity {
 
         ArrayList<String> mToppingList = Objects.requireNonNull(extrasFromMain).getStringArrayList("bundleToppings");
 
+        mToppingList.remove(null);
+
         boolean delivery = extrasFromMain.getBoolean("delivery");
 
         StringBuilder toppings = new StringBuilder();
 
         for (String s : Objects.requireNonNull(mToppingList)) {
-            toppings.append(s);
-            toppings.append(", ");
+            if(s!=null)
+            {
+                toppings.append(s);
+                toppings.append(", ");
+                totalItems++;
+            }
+
         }
 
+        if(toppings.length()!=0)
+            tv_toppingList.setText(toppings.toString().substring(0, toppings.length() - 2));
 
-        tv_toppingList.setText(toppings.toString().substring(0, toppings.length() - 2));
-
-        Double toppingPrice = ppToppings * mToppingList.size();
+        Double toppingPrice = ppToppings * totalItems;
         tv_toppingprice.setText(MessageFormat.format("{0}$", (toppingPrice).toString()));
 
         Double TotalPrice = 0.0;
